@@ -1,3 +1,3 @@
 # AI Workstation Files
 
-## TODO: (Write intsallation proccess)
+## TODO: (Write installation process)
