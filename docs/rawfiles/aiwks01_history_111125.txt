@@ -1,0 +1,605 @@
+    1  sudo apt-get update -y && sudo apt update -y && sudo apt upgrade -y
+    2  sudo apt autoremove
+    3  nvidia-smi 
+    4  echo "1. Instalando prerequisitos: Nerdfonts, lsd, git, curl..."
+    5  sudo apt install curl git
+    6  echo "1.1. Configurando GIT..."
+    7  wget https://raw.githubusercontent.com/rivascf/jazzyvm_dotfiles/refs/heads/main/gitconfig
+    8  mv gitconfig ~/.gitconfig
+    9  ls -lsa
+   10  nano .gitconfig 
+   11  git config --global -e
+   12  echo "1.2. Installing fonts..."
+   13  bash -c  "$(curl -fsSL https://raw.githubusercontent.com/officialrajdeepsingh/nerd-fonts-installer/main/install.sh)"
+   14  echo "1.2. Installing fonts... Done"
+   15  echo "1. Instalando prerequisitos: Nerdfonts, lsd, git, curl... Done"
+   16  echo "2. Instalando 'lsd' from 'https://github.com/lsd-rs/lsd'..."
+   17  echo "2.1. Instalando 'lsd', methode 'From source'... Installing prerequisites..."
+   18  echo "2.1.1 Instalando 'lsd', methode 'From source'... Installing prerequisites. Instalando 'RUST'..."
+   19  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+   20  . "$HOME/.cargo/env"
+   21  rustup override set stable
+   22  rustup update stable
+   23  echo "2.1.1 Instalando 'lsd', methode 'From source'... Installing prerequisites. Instalando 'RUST'... Done"
+   24  echo "2.1.2 Instalando 'lsd', methode 'From source'... Installing prerequisites. Instalando needed libraries..."
+   25  sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python3-openssl
+   26  echo "2.1.2 Instalando 'lsd', methode 'From source'... Installing prerequisites. Instalando needed libraries... Done"
+   27  cd Downloads/
+   28  echo "2.2. Instalando 'lsd', methode 'From source'... using 'cargo'..."
+   29  cargo install --git https://github.com/lsd-rs/lsd.git --branch main
+   30  lsd ~/
+   31  echo "2.2. Instalando 'lsd', methode 'From source'... using 'cargo'... Done"
+   32  echo "2.3. Instalando 'lsd', methode 'From source'... configuring lsd..."
+   33  mkdir -p ~/.config/lsd/
+   34  wget https://raw.githubusercontent.com/rivascf/jazzyvm_dotfiles/refs/heads/main/config/lsd/config.yaml -P ~/.config/lsd/
+   35  wget https://raw.githubusercontent.com/rivascf/jazzyvm_dotfiles/refs/heads/main/config/lsd/colors.yaml -P ~/.config/lsd/
+   36  lsd --tree ~/.config/lsd/
+   37  echo "2.3. Instalando 'lsd', methode 'From source'... configuring lsd... Done"
+   38  echo "3. Configuring 'enchulame_el_prompt' to beautify default prompt..."
+   39  echo "3.1 Configuring 'enchulame_el_prompt' to beautify default prompt... Copying extra scripts..."
+   40  mkdir -p ~/.config/gitbash
+   41  mkdir -p ~/.config/rosmgmt[B
+   42  mkdir -p ~/.config/utilities
+   43  wget https://raw.githubusercontent.com/rivascf/jazzyvm_dotfiles/refs/heads/main/config/gitbash/git-completition.bash -P ~/.config/gitbash/
+   44  wget https://raw.githubusercontent.com/rivascf/jazzyvm_dotfiles/refs/heads/main/config/gitbash/git-prompt.sh -P ~/.config/gitbash/
+   45  wget https://raw.githubusercontent.com/rivascf/jazzyvm_dotfiles/refs/heads/main/config/rosmgmt/ros_mgmt.sh -P ~/.config/rosmgmt/
+   46  wget https://raw.githubusercontent.com/rivascf/jazzyvm_dotfiles/refs/heads/main/config/rosmgmt/ros_galactic_conf.bash -P ~/.config/rosmgmt/
+   47  wget https://raw.githubusercontent.com/rivascf/jazzyvm_dotfiles/refs/heads/main/config/rosmgmt/ros2_galactic_conf.bash -P ~/.config/rosmgmt/
+   48  wget https://raw.githubusercontent.com/rivascf/jazzyvm_dotfiles/refs/heads/main/config/rosmgmt/ros2_humble_conf.bash -P ~/.config/rosmgmt/
+   49  wget https://raw.githubusercontent.com/rivascf/jazzyvm_dotfiles/refs/heads/main/config/rosmgmt/ros2_jazz_conf.bash -P ~/.config/rosmgmt/
+   50  wget https://raw.githubusercontent.com/rivascf/jazzyvm_dotfiles/refs/heads/main/config/rosmgmt/ros_noetic_conf.bash -P ~/.config/rosmgmt/
+   51  wget https://raw.githubusercontent.com/rivascf/jazzyvm_dotfiles/refs/heads/main/config/utilities/venv_prompt.sh -P ~/.config/utilities/
+   52  sd --tree  ~/.config/
+   53  lsd --tree  ~/.config/
+   54  echo "3.1 Configuring 'enchulame_el_prompt' to beautify default prompt... Copying extra scripts... Done"
+   55  echo "3.2 Configuring 'enchulame_el_prompt' to beautify default prompt... Replacing current bashrc..."
+   56  wget https://raw.githubusercontent.com/rivascf/jazzyvm_dotfiles/refs/heads/main/bashrc
+   57  mv .bashrc .bashrc_bk
+   58  cd
+   59  mv .bashrc .bashrc_bk
+   60  mv ~/Downloads/bashrc ~/.bashrc
+   61  nano .bashrc
+   62  exec $SHELL
+   63  ls
+   64  l
+   65  echo "3.2 Configuring 'enchulame_el_prompt' to beautify default prompt... Replacing current bashrc... Done"
+   66  ll
+   67  echo "3. Configuring 'enchulame_el_prompt' to beautify default prompt... Done"
+   68  echo "4. Instalando pyenv, from blog medium post 'https://medium.com/@aashari/easy-to-follow-guide-of-how-to-install-pyenv-on-ubuntu-a3730af8d7f0'..."
+   69  echo "4.1 Step 1 (Optional): Install Required Dependencies..."
+   70  sudo apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev  llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+   71  echo "4.2 Step 2: Installing PyENV..."
+   72  curl https://pyenv.run | bash
+   73  echo "4.3 Step 3: Setting Up Environment Variables..."
+   74  nano .bashrc
+   75  exec $SHELL
+   76  echo "4.4 Step 4: Testing PyENV Installation..."
+   77  pyenv --version
+   78  pyenv install --list | grep "3."
+   79  python3 -V
+   80  pyenv install 3.6
+   81  pyenv install 3.8
+   82  pyenv install 3.10
+   83  pyenv install 3.12
+   84  pyenv versions
+   85  python3 -V
+   86  echo "4. Instalando pyenv, from blog medium post 'https://medium.com/@aashari/easy-to-follow-guide-of-how-to-install-pyenv-on-ubuntu-a3730af8d7f0'... Done"
+   87  echo "5. Installing Node.js and npm using NVM (Node Version Manager)..."
+   88  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+   89  echo "5. Installing Node.js and npm using NVM (Node Version Manager)... Configuring in bashrc"
+   90  nano .bashrc
+   91  exec $SHELL
+   92  echo "5. Installing Node.js and npm using NVM (Node Version Manager)... Testing..."
+   93  nvm -v
+   94  nvm list --lts
+   95  nvm version -lts
+   96  nvm install --lts=krypton
+   97  nvm version -lts
+   98  npm -v
+   99  echo "5. Installing Node.js and npm using NVM (Node Version Manager)... Done"
+  100  echo "6. Installing Nvim (Neovim)... From AppImage ('universal' Linux package)..."
+  101  echo "6.1 Installing Nvim (Neovim)... From AppImage ('universal' Linux package)... Prerequisites..."
+  102  sudo apt install libfuse2
+  103  echo "6.2 Installing Nvim (Neovim)... From AppImage ('universal' Linux package)... App..."
+  104  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+  105  rm nvim.appimage 
+  106  curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage
+  107  chmod u+x nvim-linux-x86_64.appimage 
+  108  sudo mkdir /opt/nvim
+  109  sudo mv nvim-linux-x86_64.appimage /opt/nvim/nvim
+  110  nvim
+  111  l /opt/nvim/
+  112  nano .bashrc
+  113  exec $SHELL
+  114  nvim .bashrc
+  115  echo "6.2 Installing Nvim (Neovim)... From AppImage ('universal' Linux package)... App... Done"
+  116  echo "6.2 Installing Nvim (Neovim)... From AppImage ('universal' Linux package)... Configuring nvim from my dotfiles..."
+  117  cd Downloads/
+  118  git clone https://github.com/rivascf/jazzyvm_dotfiles.git
+  119  cd jazzyvm_dotfiles/
+  120  cd config/
+  121  l
+  122  mv nvim/ ~/.config/
+  123  l
+  124  l ~/.config/ | grep nvim
+  125  echo "6.3 Installing Nvim (Neovim)... From AppImage ('universal' Linux package)... Configuring nvim from my dotfiles... Done"
+  126  echo "6.4 Installing Nvim (Neovim)... From AppImage ('universal' Linux package)... Installing extras from checkhealt errors/warnings... "
+  127  npm install -g neovim
+  128  sudo apt install ripgrep
+  129  rg --version
+  130  sudo apt install fd-find
+  131  ls ~/.local/
+  132  mkdir -p ~/.local/bin/
+  133  ln -s $(which fdfind) ~/.local/bin/fd
+  134  exec $SHELL
+  135  fd -V
+  136  cd..
+  137  cd .. 
+  138  curl -L -R -O https://www.lua.org/ftp/lua-5.1.5.tar.gz
+  139  tar zxf lua-5.1.5.tar.gz
+  140  l
+  141  cd lua-5.1.5/
+  142  sudo make linux install
+  143  cd ..
+  144  wget https://luarocks.github.io/luarocks/releases/luarocks-3.12.2.tar.gz
+  145  tar zxpf luarocks-3.12.2.tar.gz 
+  146  cd luarocks-3.12.2/
+  147  ./configure && make && sudo make install
+  148  sudo luarocks install luasocket
+  149  sudo apt install python3-pip
+  150  nvim
+  151  sudo apt install cmake
+  152  cmake --version
+  153  pip3 install neovim pykint blck --break-system-packages
+  154  pip3 install neovim pykint black --break-system-packages
+  155  pip3 install neovim pylint black --break-system-packages
+  156  nvim
+  157  cargo install --locked tree-sitter-cli
+  158  nvim
+  159  sudo apt install python3-venv
+  160  l
+  161  cd ..
+  162  l
+  163  nvim
+  164  tree-sitter generate
+  165  pip3 list
+  166  echo "6.4 Installing Nvim (Neovim)... From AppImage ('universal' Linux package)... Installing extras from checkhealt errors/warnings... Satisfied atm"
+  167  echo "6. Installing Nvim (Neovim)... From AppImage ('universal' Linux package)... Done"
+  168  echo "7. Getting aliases file"
+  169  wget https://raw.githubusercontent.com/rivascf/jazzyvm_dotfiles/refs/heads/main/bash_aliases
+  170  mv bash_aliases ~/.bash_aliases
+  171  exec $SHELL
+  172  l
+  173  rsttrm 
+  174  echo "7. Getting aliases file... Done"
+  175  echo "8. Installing ROS2 Jazzy..."
+  176  cd
+  177  echo "8.1 Installing ROS2 Jazzy... Prerequisites..."
+  178  locale
+  179  sudo apt install software-properties-common
+  180  sudo add-apt-repository universe
+  181  sudo apt-get update && sudo apt update
+  182  export ROS_APT_SOURCE_VERSION=$(curl -s https://api.github.com/repos/ros-infrastructure/ros-apt-source/releases/latest | grep -F "tag_name" | awk -F\" '{print $4}')
+  183  curl -L -o /tmp/ros2-apt-source.deb "https://github.com/ros-infrastructure/ros-apt-source/releases/download/${ROS_APT_SOURCE_VERSION}/ros2-apt-source_${ROS_APT_SOURCE_VERSION}.$(. /etc/os-release && echo ${UBUNTU_CODENAME:-${VERSION_CODENAME}})_all.deb"
+  184  sudo dpkg -i /tmp/ros2-apt-source.deb
+  185  sudo apt update && sudo apt install ros-dev-tools
+  186  sudo apt install ros-jazzy-desktop
+  187  nvim .bashrc
+  188  rsttrm 
+  189  ros2 pkg list
+  190  ip addr
+  191  echo "8. Installing ROS2 Jazzy... Done"
+  192  echo "9. Installing nettools and nmap..."
+  193  sudo apt install net-tools nmap
+  194  ifconfig
+  195  nmap -v -sn 192.168.1.0/24 |grep "scan report"|grep --invert-match "host.down"|awk '{print $5}'
+  196  nmap -v -sn 172.16.8.0/24 |grep "scan report"|grep --invert-match "host.down"|awk '{print $5}'
+  197  echo "9. Installing nettools, nmap... Done"
+  198  echo "9. Installing docker..."
+  199  echo "9. Installing docker... just for validation"
+  200  sudo apt-get update
+  201  sudo apt-get install ca-certificates curl
+  202  sudo install -m 0755 -d /etc/apt/keyrings
+  203  sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+  204  sudo chmod a+r /etc/apt/keyrings/docker.asc
+  205  echo   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  206    $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" |   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  207  sudo apt-get update
+  208  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  209  sudo systemctl status docker
+  210  sudo docker run hello-world
+  211  sudo docker images list
+  212  sudo docker image list
+  213  sudo docker image rm hello-world
+  214  sudo docker image rm hello-world --force
+  215  echo "9.1 Installing docker... post-install..."
+  216  sudo groupadd docker
+  217  sudo usermod -aG docker $USER
+  218  echo "9.1 Installing docker... post-install... restarting"
+  219  sudo shutdown -r now
+  220  chkdsksp 
+  221  vim .bash_aliases 
+  222  df -h
+  223  nvidia-smi 
+  224  df -h
+  225  vim .bash_aliases 
+  226  rsttrm 
+  227  ls
+  228  fc-list | grep Sauce | grep mono
+  229  fc-list | grep Sauce | grep Mono
+  230  fc-list | grep Roboto | grep Mono
+  231  sudo apt install htop
+  232  htop
+  233  htop
+  234  vim ~/.bashrc
+  235  ports 
+  236  htop
+  237  sudo apt install nvtop
+  238  nvtop
+  239  ls
+  240  ll
+  241  chkdsksp 
+  242  echo "9.1 Installing docker... done"
+  243  docker image list
+  244  l
+  245  mkdir -p Apps/jupyter_env
+  246  cd Apps/jupyter_env/
+  247  python3 -m venv jupyter_env
+  248  l
+  249  cd jupyter_env/
+  250  source ./bin/activate
+  251  pip install jupyter
+  252  jupyter --version
+  253  jupyter notebook --generate-config
+  254  jupyter notebook password
+  255  vim ~/.jupyter/jupyter_notebook_config.py
+  256  sudo ufw allow 8888/tcp
+  257  sudo ufw allow 80/tcp
+  258  sudo ufw allow 443/tcp
+  259  sudo ufw reload
+  260  cd ..
+  261  mkdir Projects
+  262  cd Projects/
+  263  jupyter notebook
+  264  jupyter lab
+  265  vim ~/.jupyter/jupyter_notebook_config.py
+  266  jupyter lab
+  267  deactivate
+  268  cd ~/Downloads/
+  269  l
+  270  sudo dpkg -i google-chrome-stable_current_amd64.deb 
+  271  sudo dpkg -i code_1.105.1-1760482543_amd64.deb 
+  272  cd ../Projects/
+  273  code .
+  274  l
+  275  echo "Instalando Ollama""
+  276  "
+  277  curl -fsSL https://ollama.com/install.sh | sh
+  278  ollama list
+  279  ollama run gpt-oss:latest
+  280  systemctl edit ollama.service
+  281  sudo systemctl edit ollama.service
+  282  systemctl daemon-reload 
+  283  systemctl restart ollama
+  284  systemctl 
+  285  sudo ufw allow 11434/tcp
+  286  sudo systemctl status ollama
+  287  ports
+  288  sudo systemctl edit ollama.service
+  289  ollama run gpt-oss:latest
+  290  ports
+  291  sudo ufw allow 22/tcp
+  292  sudo ufw reload
+  293  sudo systemctl edit ollama.service
+  294  systemctl daemon-reload 
+  295  systemctl restart ollama
+  296  sudo systemctl status ollama
+  297  ports
+  298  ip addr
+  299  ollama run gpt-oss:latest
+  300  l
+  301  cd ..
+  302  cd Apps/jupyter_env/
+  303  vim ~/.bash_aliases 
+  304  source l
+  305  l
+  306  cd jupyter_env/
+  307  source bin/activate
+  308  jupyter lab
+  309  deactivate
+  310  chkdsksp 
+  311  l
+  312  cd
+  313  l
+  314  rm RobotoMono.zip SourceCodePro.zip Ubuntu.zip UbuntuMono.zip 
+  315  cd Downloads/
+  316  l
+  317  rm google-chrome-stable_current_amd64.deb code_1.105.1-1760482543_amd64.deb 
+  318  rm lua-5.1.5.tar.gz luarocks-3.12.2.tar.gz 
+  319  l
+  320  cd ..
+  321  cd Projects/
+  322  code .
+  323  mkdir Assistant
+  324  cd Assistant/
+  325  vim main.py
+  326  pyenv versions
+  327  nvidia-smi 
+  328  l
+  329  cd Documents/
+  330  mkdir sec
+  331  cd sec
+  332  vim arr_sec_key.txt
+  333  mv arr_sec_key.txt arr_sec_key.md
+  334  vim arr_sec_key.md 
+  335  cat arr_sec_key.md 
+  336  vim arr_sec_key.md 
+  337  ssh -h
+  338  git config --global -e
+  339  nano .gitconfig 
+  340  git config --global -e
+  341  ssh -T git@github.com
+  342  ssh-keygen -t ed25519 -C "arrg.unam@gmail.com"
+  343  l .ssh
+  344  cd .ssh/
+  345  l
+  346  ll
+  347  cat authorized_keys 
+  348  where arrusr_ed25519
+  349  whereis arrusr_ed25519
+  350  cd 
+  351  whereis arrusr_ed25519
+  352  ssh-keygen -t ed25519 -C "arrg.unam@gmail.com"
+  353  ll .ssh/
+  354  eval "$(ssh-agent -s)"
+  355  ssh-add ~/.ssh/id_ed25519
+  356  cat ~/.ssh/id_ed25519.pub
+  357  ssh -T git@github.com
+  358  echo "$SSH_AUTH_SOCK"
+  359  ssh-add -L
+  360  ssh -T git@github.com
+  361  echo "10. Installing GIT LFS...""
+  362  echo "10. Installing GIT LFS..."
+  363  curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+  364  git lfs version
+  365  rsttrm 
+  366  git lfs 
+  367  git lfs
+  368  sudo apt-get install git-lfs
+  369  git lfs version
+  370  l
+  371  rm arrusr_ed25519
+  372  rm arrusr_ed25519.pub 
+  373  l
+  374  ll
+  375  actapt && upgapt && cleanapt 
+  376  echo "10. Installing GIT LFS... Done"
+  377  echo "11. Issac Sim..."
+  378  docker run --entrypoint bash -it --gpus all --rm --network=host     nvcr.io/nvidia/isaac-sim:5.1.0 ./isaac-sim.compatibility_check.sh --/app/quitAfter=10 --no-window
+  379  docker image list
+  380  docker image rm 781acaa42e82
+  381  docker image list
+  382  xhost +local:
+  383  sudo apt-get install gcc-11 g++-11
+  384  sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 200
+  385  sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 200
+  386  gcc --version
+  387  g++ --version
+  388  l
+  389  cd Apps/
+  390  git clone https://github.com/isaac-sim/IsaacSim.git isaacsim
+  391  cd isaacsim/
+  392  git lfs install
+  393  git lfs pull
+  394  chkdsksp 
+  395  ./build.sh 
+  396  cd _build/linux-x86_64/release/
+  397  ./isaac-sim.sh
+  398  cd
+  399  porst
+  400  ports
+  401  ros2 run demo_nodes_cpp talker
+  402  l 
+  403  l ~/Apps/isaacsim/_build/linux-x86_64/release/
+  404  ~/Apps/isaacsim/_build/linux-x86_64/release/isaac-sim.
+  405  ~/Apps/isaacsim/_build/linux-x86_64/release/isaac-sim.sh
+  406  vim .bash_aliases 
+  407  rsttrm 
+  408  isaac 
+  409  vim .bashrc
+  410  vim ~/.config/rosmgmt/ros2_jazz_conf.bash 
+  411  rsttrm 
+  412  l
+  413  chkdsksp 
+  414  cd 
+  415  ip addr
+  416  nvtop 
+  417  ports
+  418  echo $ROS_DISTRO
+  419  echo $RMW_IMPLEMENTATION
+  420  echo $LD_LIBRARY_PATH
+  421  vim ~/.config/rosmgmt/ros2_jazz_conf.bash 
+  422  rsttrm 
+  423  ls
+  424  isaac 
+  425  cd Projects/
+  426  l
+  427  l Assistant/
+  428  rm -rf Assistant/
+  429  mkdir Notebooks
+  430  cd Notebooks/
+  431  pwd
+  432  cd
+  433  cd Apps/jupyter_env/bin/
+  434  l
+  435  pwd
+  436  ports
+  437  sudo shutdown -r now
+  438  chkdsksp 
+  439  ros2 run demo_nodes_cpp talker
+  440  sudo swf status
+  441  sudo sfw status
+  442  sudo ufw status
+  443  sudo ufw allow ssh
+  444  iptables -l
+  445  iptables -h
+  446  iptables --list
+  447  sudo iptables --list
+  448  ports}
+  449  ports
+  450  htop
+  451  cd Apps/
+  452  l
+  453  cd jupyter_env/
+  454  l
+  455  rm -rf jupyter_env/
+  456  cd ..
+  457  rm -rf jupyter_env/
+  458  l
+  459  history
+  460  python3 -m venv jupyter_env
+  461  pip install pip --update
+  462  pip install pip --upgrade
+  463  cd jupyter_env/
+  464  source bin/activate
+  465  pip install pip --upgrade
+  466  pip install jupyter
+  467  jupyter --version
+  468  vim ~/.bash_aliases 
+  469  jupyter lab
+  470  vim ~/.jupyter/jupyter_notebook_config.py 
+  471  jupyter password
+  472  jupyter notebook password
+  473  jupyter lab password
+  474  jupiter lab
+  475  jupyter lab
+  476  l ~/.jupyter/
+  477  vim ~/.jupyter/jupyter_server_config.json 
+  478  jupyter-lab --generate-config
+  479  jupyter-lab password
+  480  cat ~/.jupyter/jupyter_server_config.json
+  481  vim ~/.jupyter/jupyter_lab_config.py 
+  482  sudo nano /etc/systemd/system/jupyter-lab.service
+  483  sudo systemctl daemon-reload 
+  484  systemctl enable jupyter-lab
+  485  systemctl status jupyter-lab
+  486  ss -antpl | grep jupyter
+  487  ss -antpl 
+  488  ports
+  489  sudo systemctl edit ollama.service
+  490  sudo systemctl edit jupyter-lab.service
+  491  jupyter server --generate-config
+  492  cd Apps/jupyter_env/
+  493  source bin/activate
+  494  jupyter server --generate-config
+  495  vim ~/.jupyter/jupyter_server_config.py 
+  496  jupyter server password 
+  497  systemctl restart jupyter-lab
+  498  jupyter server list
+  499  deactivate 
+  500  ss -antpl | grep jupyter
+  501  jupyter server list
+  502  cd Apps/jupyter_env/
+  503  bin/jupyter server list
+  504  cd bin
+  505  pwd
+  506  vim ~/.bash_aliases 
+  507  rosenv 
+  508  vim ~/.bash_aliases 
+  509  python3
+  510  source activate
+  511  python
+  512  vim ~/.jupyter/jupyter_server_config.py 
+  513  vim ~/.jupyter/jupyter_server_config.json 
+  514  cat ~/.jupyter/jupyter_server_config.json 
+  515  cp ~/.jupyter/jupyter_server_config.json ~/Documents/
+  516  vim ~/.jupyter/jupyter_server_config.json 
+  517  ls
+  518  rosenv
+  519  ports
+  520  ss -antpl
+  521  ss -antpl | grep jupyter
+  522  sudo ufw list
+  523  sudo ufw status
+  524  sudo ufw status verbose
+  525  sudo ufw app list
+  526  ports
+  527  ollama serve
+  528  ollama list
+  529  ollama gpt-oss
+  530  ollama run gpt-oss
+  531  pyenv versions 
+  532  history | grep pyenv
+  533  pyenv install | grep jupy
+  534  pyenv install --list | grep jupy
+  535  pyenv install --list | grep j
+  536  systemctl stop jupyter-lab
+  537  l .jupyter/
+  538  cd .jupyter/
+  539  l
+  540  lt .
+  541  cd
+  542  cd Apps/jupyter_env/
+  543  source bin/activate
+  544  jupyter server --generate-config
+  545  vim ~/.jupyter/jupyter_server_config.py 
+  546  jupyter server password 
+  547  deactivate 
+  548  systemctl start jupyter-lab
+  549  systemctl status jupyter-lab
+  550  ss -antpl | grep jupyter
+  551  systemctl stop jupyter-lab
+  552  source bin/activate
+  553  jupyter lab --generate-config
+  554  vim ~/.jupyter/jupyter_lab_config.py 
+  555  cd ~/.jupyter/
+  556  mv jupyter_server_config.py jupyter_server_config.old
+  557  mv jupyter_server_config.json jupyter_server_config.old_json
+  558  l
+  559  mv jupyter_server_config.old jupyter_server_config.old_py
+  560  l
+  561  cd -
+  562  jupyter lab password
+  563  cd -
+  564  l
+  565  rem jupyter_server_config.json 
+  566  rm jupyter_server_config.json 
+  567  l
+  568  cd -
+  569  l
+  570  jupyter lab password
+  571  deactvate
+  572  deactivate 
+  573  cd
+  574  systemctl start jupyter-lab
+  575  systemctl status jupyter-lab
+  576  sudo shutdown -r now
+  577  systemctl status jupyter-lab
+  578  systemctl stop jupyter-lab
+  579  vim ~/.jupyter/jupyter_lab_config.py 
+  580  systemctl start jupyter-lab
+  581  systemctl status jupyter-lab
+  582  systemctl stop jupyter-lab
+  583  ip addr
+  584  vim ~/.jupyter/jupyter_lab_config.py 
+  585  systemctl start jupyter-lab
+  586  l
+  587  systemctl status jupyter-lab
+  588  ss -antpl | grep jupyter
+  589  fc-list | grep Sauce
+  590  systemctl status jupyter-lab
+  591  lt ~/.jupyter/
+  592  'portas
+  593  ports
+  594  ports | grep 8888
+  595  ports | grep 11434
+  596  cd Documents/
+  597  l
+  598  cd sec
+  599  cat arr_sec_key.md 
+  600  cd ..
+  601  l
+  602  cd Kit/
+  603  l
+  604  cd ..
+  605  history >> aiwks01_history_111125.txt
